@@ -126,17 +126,21 @@ const CodePage = () => {
               >
                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
                 <ReactMarkdown components={{
-                  pre: ({ node, ...props }) => (
-                    <div className="overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg">
-                      <pre {...props} />
-                    </div>
-                  ),
-                  code: ({ node, ...props }) => (
-                    <code className="bg-black/10 rounded-lg p-1" {...props} />
-                  )
-                }} className="text-sm overflow-hidden leading-7">
-                  {message.content || ""}
-                </ReactMarkdown>
+  pre: ({ node, ...props }) => (
+    <div className="overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg">
+      <pre {...props} />
+    </div>
+  ),
+  code: ({ node, ...props }) => (
+    <code className="bg-black/10 rounded-lg p-1" {...props} />
+  ),
+  p: ({ node, ...props }) => (
+    <p className="text-sm overflow-hidden leading-7" {...props} />
+  ),
+  // Add more components as needed based on your content
+}} className="text-sm overflow-hidden leading-7">
+  {typeof message.content === 'string' ? message.content : ""}
+</ReactMarkdown>
               </div>
             ))}
           </div>
