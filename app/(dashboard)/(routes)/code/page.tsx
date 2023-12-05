@@ -40,7 +40,7 @@ const CodePage = () => {
   
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const userMessage: OpenAI.Chat.CreateChatCompletionRequestMessage = { role: "user", content: values.prompt };
+      const userMessage: OpenAI.Chat.ChatCompletionMessageParam = { role: "user", content: values.prompt };
       const newMessages = [...messages, userMessage];
       
       const response = await axios.post('/api/code', { messages: newMessages });
@@ -118,7 +118,7 @@ const CodePage = () => {
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message) => (
               <div 
-                key={message.content} 
+                 key={`${message.content}`} 
                 className={cn(
                   "p-8 w-full flex items-start gap-x-8 rounded-lg",
                   message.role === "user" ? "bg-white border border-black/10" : "bg-muted",
